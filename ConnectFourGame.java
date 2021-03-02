@@ -1,29 +1,9 @@
-package HW2;
-
 import java.util.ArrayList;
 
 public class ConnectFourGame {
 
     public static final int BOARD_ROWS = 6;
     public static final int BOARD_COLS = 7;
-
-    enum Piece {
-        A,
-        NONE,
-        B
-    }
-
-    enum GameWinner {
-        DRAW,
-        NONE,
-        A,
-        B
-    }
-
-    enum Player {
-        A,
-        B
-    }
 
     public GameWinner winner = GameWinner.NONE;
 

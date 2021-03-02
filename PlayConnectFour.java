@@ -1,10 +1,4 @@
-package HW2;
-
 import java.util.*;
-
-import HW2.ConnectFourGame.GameWinner;
-import HW2.ConnectFourGame.Player;
-import HW2.ConnectFourGame.Piece;
 
 public class PlayConnectFour {
 
