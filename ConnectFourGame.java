@@ -1,7 +1,5 @@
 package HW2;
 
-import java.util.ArrayList;
-
 public class ConnectFourGame {
 
     public static final int BOARD_ROWS = 6;
@@ -32,9 +30,7 @@ public class ConnectFourGame {
         return true;
     }
 
-    public ArrayList<ArrayList<Piece>> makeMove(Player player, Integer column) throws InvalidMoveExcpetion {
-        return new ArrayList<>();
-    }
+    public void makeMove(Player player, Integer column) throws InvalidMoveExcpetion {}
 
     public Player playerToMove = Player.A; 
 
