@@ -54,12 +54,12 @@ public class PlayConnectFour {
     public static void main(String[] args) {
         ConnectFourGame game = new ConnectFourGame();
 
-        String playerName = game.toMove == Player.A ? "Player A" : "Player B";
+        String playerName = game.playerToMove == Player.A ? "Player A" : "Player B";
         System.out.println("Welcome to connect four! " + playerName + " will move first.");
         System.out.println("When prompted, enter a number between 1 and 7 to place a piece.");
 
         while (game.winner == GameWinner.NONE) { // TODO: this is only slightly confusing because why is 'not having a winner' the end state
-            PlayConnectFour.doTurn(game, game.toMove);
+            PlayConnectFour.doTurn(game, game.playerToMove);
         }
         switch (game.winner) {
             case A:

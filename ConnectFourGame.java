@@ -28,6 +28,7 @@ public class ConnectFourGame {
     public GameWinner winner = GameWinner.NONE;
 
     public boolean isValidMove(Player player, Integer column) {
+        // should be correct player making the move and a valid column
         return true;
     }
 
@@ -35,7 +36,7 @@ public class ConnectFourGame {
         return new ArrayList<>();
     }
 
-    public Player toMove = Player.A; 
+    public Player playerToMove = Player.A; 
 
     public Piece getSqure(int row, int col) {
         return Piece.A;
