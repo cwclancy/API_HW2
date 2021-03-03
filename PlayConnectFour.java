@@ -1,3 +1,4 @@
+package HW2;
 import java.util.*;
 
 public class PlayConnectFour {
