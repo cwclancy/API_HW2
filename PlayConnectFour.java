@@ -3,31 +3,12 @@ import java.util.*;
 
 public class PlayConnectFour {
 
-    private static void printBoard(ConnectFourGame game) {
-        for (int i=0; i< ConnectFourGame.BOARD_ROWS; i++) {
-            for (int j=0; j<ConnectFourGame.BOARD_COLS; j++) {
-                Piece currPiece = game.getSqure(i, j);
-                switch (currPiece) {
-                    case NONE:
-                        System.out.print("x");
-                        break;
-                    case A:
-                        System.out.print("a");
-                        break;
-                    case B:
-                        System.out.print("b");
-                }
-            }
-            System.out.println("");
-        }
-    }
-
-    private static void doTurn(ConnectFourGame game, Player playerToMove, Scanner scanner) {
-        printBoard(game);
-        String playerName = playerToMove == Player.A ? "Player A" : "Player B";
-        System.out.print(playerName + " choose a column for your piece: ");
+    private static void doTurn(ConnectFourGame game, GamePlayer playerToMove, Scanner scanner) {
+        System.out.println(game.toString());
+        String playerName = playerToMove == GamePlayer.A ? "Player A" : "Player B";
+        System.out.print(playerName + " enter the column for your piece: ");
         try {
-            int columnForPiece = scanner.nextInt();
+            int columnForPiece = scanner.nextInt() - 1;
             if (game.isValidMove(playerToMove, columnForPiece)) {
                 try {
                     game.makeMove(playerToMove, columnForPiece);
@@ -36,6 +17,7 @@ public class PlayConnectFour {
                     doTurn(game, playerToMove, scanner);
                 }
             } else {
+                System.out.println("was not a valid move");
                 doTurn(game, playerToMove, scanner);
             }
         } catch (InputMismatchException e) {
@@ -48,15 +30,16 @@ public class PlayConnectFour {
         ConnectFourGame game = new ConnectFourGame();
         Scanner scanner = new Scanner(System.in);
 
-        String playerName = game.playerToMove == Player.A ? "Player A" : "Player B";
+        String playerName = game.playerToMove() == GamePlayer.A ? "Player A" : "Player B";
         System.out.println("Welcome to connect four! " + playerName + " will move first.");
         System.out.println("When prompted, enter a number between 1 and 7 to place a piece.");
+        System.out.println("Entering anything that is not a number between 1 and 7 will break the game :)");
 
-        while (game.winner == GameWinner.NONE) { // TODO: this is only slightly confusing because why is 'not having a winner' the end state
-            PlayConnectFour.doTurn(game, game.playerToMove, scanner);
+        while (game.state() == GameState.IN_PROGRESS) {
+            PlayConnectFour.doTurn(game, game.playerToMove(), scanner);
         }
 
-        switch (game.winner) {
+        switch (game.winner()) {
             case A:
                 System.out.println("Congrats Player A! You won!!");
                 break;

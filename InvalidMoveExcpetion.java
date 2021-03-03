@@ -1,7 +1,9 @@
 package HW2;
 
 public class InvalidMoveExcpetion extends RuntimeException{
-    public InvalidMoveExcpetion(String errorMessage) {
-        super(errorMessage);
+    private static final long serialVersionUID = 1L;
+    
+    public InvalidMoveExcpetion() {
+        super();
     }
 }

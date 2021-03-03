@@ -1,5 +1,5 @@
 package HW2;
-public enum Piece {
+public enum GamePiece {
     A,
     NONE,
     B
