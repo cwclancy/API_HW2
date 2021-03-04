@@ -109,43 +109,40 @@ public class ConnectFourGame {
     }
 
     /**
-     * Returns {@code true} if {@code player} can legally place a 
-     * piece in {@code column}. The {@code player} must be the {@code game.playerToMove()}
-     * and the {@code column} must be in the board, and not full.
+     * Returns {@code true} if {@code game.nextToMove()} can legally place a 
+     * piece in {@code column}. Tthe {@code column} must be in the board, and not full.
      * 
-     * @param player the player to make the move
      * @param column the column to place the piece in
      * 
-     * @return {@code true} if the player can legally place a piece in the {@code column}, and {@code false} otherwise.
+     * @return {@code true} if the {@code game.nextToMove()} player can legally place a piece in the {@code column}, and {@code false} otherwise.
      */
-    public boolean isValidMove(GamePlayer player, int column)  {
-        return !isColumnFull(column) && player == playerToMove;
+    public boolean isValidMove(int column)  {
+        return !isColumnFull(column);
     }
 
     /**
-     * Updates the {@code ConnectFourGame} with the move by {@code player} placing a piece in {@code column}. A piece
-     * is added to the board by the {@code player} in the {@code column} specified. If this 
+     * Updates the {@code ConnectFourGame} with the move by {@code game.playerToMove()} placing a piece in {@code column}. A piece
+     * is added to the board by the {@code game.playerToMove()} in the {@code column} specified. If this 
      * results in four in a row or full board, the {@code game.state()} becomes {@code OVER}
      * and the winner (or draw state) can be found in {@code game.winner()}. Finally, the
      * {@code game.playerToMove()} switches to the other player.
      * 
-     * @param player The player to make the move.
      * @param column The column to add the piece to.
      * 
-     * @throws InvalidMoveExcpetion Thrown if {@code isValidMove(player, column)} is false.
+     * @throws InvalidMoveExcpetion Thrown if {@code isValidMove(column)} is false.
      * 
      */
-    public void makeMove(GamePlayer player, int column) throws InvalidMoveExcpetion {
-        if (!isValidMove(player, column)) {
+    public void makeMove(int column) throws InvalidMoveExcpetion {
+        if (!isValidMove(column)) {
             throw new InvalidMoveExcpetion();
         }
 
         int rowForPlacedPiece = rowForPlacedPiece(column);
-        board[rowForPlacedPiece][column] = player == GamePlayer.A ? GamePiece.A : GamePiece.B;
+        board[rowForPlacedPiece][column] = playerToMove == GamePlayer.A ? GamePiece.A : GamePiece.B;
 
         if (playerWon()) {
             state = GameState.OVER;
-            winner = player == GamePlayer.A ? GameWinner.A : GameWinner.B;
+            winner = playerToMove == GamePlayer.A ? GameWinner.A : GameWinner.B;
         }
         
         if (boardFull()) {
@@ -153,7 +150,7 @@ public class ConnectFourGame {
             winner = GameWinner.DRAW;
         }
 
-        playerToMove = player == GamePlayer.A ? GamePlayer.B : GamePlayer.A;
+        playerToMove = playerToMove == GamePlayer.A ? GamePlayer.B : GamePlayer.A;
     }
 
     /**
@@ -209,7 +206,7 @@ public class ConnectFourGame {
     }
 
     private boolean isColumnFull(int col) {
-        if (0 < col || col >= BOARD_COLS) {
+        if (0 > col || col >= BOARD_COLS) {
             return true;
         }
         for (int row=0; row<BOARD_ROWS; row++) {

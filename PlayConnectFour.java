@@ -3,26 +3,26 @@ import java.util.*;
 
 public class PlayConnectFour {
 
-    private static void doTurn(ConnectFourGame game, GamePlayer playerToMove, Scanner scanner) {
+    private static void doTurn(ConnectFourGame game, Scanner scanner) {
         System.out.println(game.toString());
-        String playerName = playerToMove == GamePlayer.A ? "Player A" : "Player B";
+        String playerName = game.playerToMove() == GamePlayer.A ? "Player A" : "Player B";
         System.out.print(playerName + " enter the column for your piece: ");
         try {
             int columnForPiece = scanner.nextInt() - 1;
-            if (game.isValidMove(playerToMove, columnForPiece)) {
+            if (game.isValidMove(columnForPiece)) {
                 try {
-                    game.makeMove(playerToMove, columnForPiece);
+                    game.makeMove(columnForPiece);
                 } catch (InvalidMoveExcpetion e) {
                     System.out.println(playerName + " made an illegal move, try again.");
-                    doTurn(game, playerToMove, scanner);
+                    doTurn(game, scanner);
                 }
             } else {
                 System.out.println("was not a valid move");
-                doTurn(game, playerToMove, scanner);
+                doTurn(game, scanner);
             }
         } catch (InputMismatchException e) {
             System.out.println(playerName + " please enter a number between 1 and 7");
-            doTurn(game, playerToMove, scanner);
+            doTurn(game, scanner);
         }
     }
 
@@ -36,7 +36,7 @@ public class PlayConnectFour {
         System.out.println("Entering anything that is not a number between 1 and 7 will break the game :)");
 
         while (game.state() == GameState.IN_PROGRESS) {
-            PlayConnectFour.doTurn(game, game.playerToMove(), scanner);
+            PlayConnectFour.doTurn(game, scanner);
         }
 
         switch (game.winner()) {
