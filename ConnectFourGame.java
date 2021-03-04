@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * The {@code ConnectFourGame} class represents a game of connect four - including
  * the board and game state. This class is typically used to simplify the creation
- * of 2-player connect four client.
+ * of 2-player connect four clients.
  * 
  * <p>
  * To create a Connect Four Game (an instance of this class) it's as simple as
