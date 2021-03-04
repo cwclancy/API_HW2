@@ -1,8 +1,12 @@
 package HW2;
 import java.util.*;
 
-public class PlayConnectFour {
-
+/**
+ * The {@code PlayConnectFour} class represents a text-based client
+ * that uses {@code ConnectFourGame}. This client allows two players
+ * to play against each other and the game will stop when one of the player wins.
+ */
+ public class PlayConnectFour {
     private static void doTurn(ConnectFourGame game, Scanner scanner) {
         System.out.println(game.toString());
         String playerName = game.playerToMove() == GamePlayer.A ? "Player A" : "Player B";
